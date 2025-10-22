@@ -13,7 +13,7 @@ stages:
       - train.py
       - data/train3.csv
     outs:
-      - models/log_reg_penguins.joblib
+      - models/log_reg_penguins.joblib  # only this file
 
   tune:
     cmd: python tune.py
@@ -22,4 +22,4 @@ stages:
       - data/train3.csv
       - data/test3.csv
     outs:
-      - models/
+      - models_tuned/                   # new separate folder

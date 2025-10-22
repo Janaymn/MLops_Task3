@@ -38,8 +38,9 @@ with mlflow.start_run(run_name="rf_tuning_penguins"):
             mlflow.log_params(params)
             mlflow.log_metric("test_accuracy", acc)
 
-            os.makedirs("models", exist_ok=True)
-            path = f"models/rf_{params['n_estimators']}_{params['max_depth']}.joblib"
+            os.makedirs("models_tuned", exist_ok=True)
+            path = f"models_tuned/rf_{params['n_estimators']}_{params['max_depth']}.joblib"
+
             joblib.dump(rf, path)
             mlflow.log_artifact(path)
 
