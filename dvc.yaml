@@ -1,0 +1,25 @@
+stages:
+  preprocess:
+    cmd: python preprocess.py
+    deps:
+      - preprocess.py
+    outs:
+      - data/train3.csv
+      - data/test3.csv
+
+  train:
+    cmd: python train.py
+    deps:
+      - train.py
+      - data/train3.csv
+    outs:
+      - models/log_reg_penguins.joblib
+
+  tune:
+    cmd: python tune.py
+    deps:
+      - tune.py
+      - data/train3.csv
+      - data/test3.csv
+    outs:
+      - models/
