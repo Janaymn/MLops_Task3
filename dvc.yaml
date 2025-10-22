@@ -13,7 +13,7 @@ stages:
       - train.py
       - data/train3.csv
     outs:
-      - models/log_reg_penguins.joblib  # only this file
+      - models/log_reg_penguins.joblib  # baseline model
 
   tune:
     cmd: python tune.py
@@ -22,4 +22,22 @@ stages:
       - data/train3.csv
       - data/test3.csv
     outs:
-      - models_tuned/                   # new separate folder
+      - models_tuned/                   # tuned RandomForest models
+
+  train_xgb:
+    cmd: python train_autolog_xgb.py
+    deps:
+      - train_autolog_xgb.py
+      - data/train3.csv
+      - data/test3.csv
+    outs:
+      - models_xgb/                     # store xgboost models separately
+
+  train_lgbm:
+    cmd: python train_autolog_lgbm.py
+    deps:
+      - train_autolog_lgbm.py
+      - data/train3.csv
+      - data/test3.csv
+    outs:
+      - models_lgbm/                    # store lightgbm models separately
